@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.cqupt.pedometer.R;
 import com.cqupt.pedometer.main.SettingActivity;
-import com.cqupt.pedometer.main.WarningSetActivity;
 import com.cqupt.pedometer.welcome.SetActivity;
 
 public class Choose extends Activity {
@@ -24,7 +23,7 @@ public class Choose extends Activity {
     public static final String IS_MANUAL_SET_NOT_AUTO_CONNECT = "isManual";
     public static final String GENDER = "gender";
     private TextView title, isTrue, isFalse;
-    private boolean isAutoConnect, isSetGender,isMySwitch;
+    private boolean isAutoConnect, isSetGender, isMySwitch;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -70,17 +69,6 @@ public class Choose extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        try {
-            isMySwitch = bundle.getBoolean(WarningSetActivity.MY_SWITCH);
-            if (isMySwitch) {
-                title.setText(getString(R.string.mySwitch));
-                isTrue.setText(getString(R.string.close));
-                isFalse.setText(getString(R.string.open));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 
     public void titleImageButton(View view) {

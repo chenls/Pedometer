@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.cqupt.pedometer.R;
 import com.cqupt.pedometer.main.CommonTools;
-import com.cqupt.pedometer.main.WarningSetActivity;
 import com.cqupt.pedometer.welcome.SetActivity;
 
 public class Input extends Activity {
@@ -25,7 +24,7 @@ public class Input extends Activity {
     public static final String PHONE_SET = "phoneSet";
     public static final String MESSAGE_SET = "messageSet";
     private SharedPreferences sharedPreferences;
-    private boolean  isSetHeight, isSetWeight, isPhoneSet, isMessageSet;
+    private boolean isSetHeight, isSetWeight, isPhoneSet, isMessageSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +44,7 @@ public class Input extends Activity {
         }
         Intent intent = this.getIntent();        //获取已有的intent对象
         Bundle bundle = intent.getExtras();    //获取intent里面的bundle对象
-                try {
+        try {
             isSetHeight = bundle.getBoolean(SetActivity.SET_HEIGHT);
             if (isSetHeight) {
                 ((TextView) findViewById(R.id.title)).setText(getString(R.string.set_height));
@@ -57,23 +56,6 @@ public class Input extends Activity {
             isSetWeight = bundle.getBoolean(SetActivity.SET_WEIGHT);
             if (isSetWeight) {
                 ((TextView) findViewById(R.id.title)).setText(getString(R.string.set_weight));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            isPhoneSet = bundle.getBoolean(WarningSetActivity.PHONE_SET);
-            if (isPhoneSet) {
-                ((TextView) findViewById(R.id.title)).setText(getString(R.string.phone));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            isMessageSet = bundle.getBoolean(WarningSetActivity.MESSAGE_SET);
-            if (isMessageSet) {
-                ((TextView) findViewById(R.id.title)).setText(getString(R.string.message));
-                ((EditText) findViewById(R.id.et_pwd)).setInputType(0x00000001);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -97,20 +79,11 @@ public class Input extends Activity {
         EditText et_pwd;
         et_pwd = (EditText) findViewById(R.id.et_pwd);
         String value = et_pwd.getText().toString();
-        if (isPhoneSet) {
-            finishAndPutData(value, WarningSetActivity.RESULT);
-            return;
-        } else if (isMessageSet) {
-            finishAndPutData(value, WarningSetActivity.RESULT);
-            return;
-        } else if (isSetWeight) {
+        if (isSetWeight) {
             finishAndSaveData(value, SET_WEIGHT);
-            return;
         } else if (isSetHeight) {
             finishAndSaveData(value, SET_HEIGHT);
-            return;
         }
-
     }
 
     private void finishAndSaveData(String value, String setWeight) {

@@ -218,13 +218,15 @@ public class UartService extends Service {
                     stringBuilder.append(String.format("%X ", byteChar));
                 String a = stringBuilder.toString();
                 a = a.replaceAll("[^0-9a-zA-Z]", "");
+                Log.d("myLog---", a);
                 // String.subSequence(beginIndex（开始字节数）, endIndex（结束字节数）)
                 String b = (String) a.subSequence(0, 1);
                 // 截取字符串
                 String c = a.substring(1, a.length());
                 // Integer.parseInt(s, radix) radix设置为10，表示10进制，16表示16进制啦
-                int i = Integer.parseInt(c, 16);
-                intent.putExtra(EXTRA_DATA, i + "");
+                int i = Integer.parseInt(b, 16);
+                int j = Integer.parseInt(c, 16);
+                intent.putExtra(EXTRA_DATA, i * 256 + j + "");
                 intent.putExtra(SAFE_DATA, b);
             }
 
